@@ -4,7 +4,7 @@
 
 <body>
     <div class="container">
-        <header><?php include_once $this->header;?></header>
+        <header><?php include_once $this->header;?></header> <!-- 셋 다 파일경로-->
         <main><?php include_once $this->main;?></main>
         <footer><?php include_once $this->footer;?></footer>
     </div>

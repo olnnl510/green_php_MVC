@@ -7,8 +7,10 @@ class BoardModel extends Model
 {
     public function selBoardList()
     {
-        $sql = "SELECT i_board, title, created_at
-                FROM t_board
+        $sql = "SELECT A.i_board, A.title, A.created_at, B.nm
+                FROM t_board A
+                INNER JOIN t_user B
+                ON A.i_user = B.i_user
                 ORDER BY i_board DESC";
         $stmt = $this->pdo->prepare($sql); // statement : 맨 쿼리문 실행함. 문자열에서 원하는 위치에 원하는 값을 쏙쏙 넣고싶을 때 씀
         $stmt->execute(); // 실행
@@ -27,7 +29,8 @@ class BoardModel extends Model
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function delBoard($param) {
+    public function delBoard($param)
+    {
         $sql = "DELETE
                 FROM t_board
                 WHERE i_board=:i_board";
@@ -36,8 +39,30 @@ class BoardModel extends Model
         $stmt->bindValue(':i_board', $param["i_board"]);
         $stmt->execute(); // 실행 까지만 하면 됨. 굳이 가져올 자료 없음
     }
-}
 
+    public function updBoard($param)
+    {
+        $sql = "UPDATE t_board
+                SET title = :title, ctnt = :ctnt
+                WHERE i_board=:i_board";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':i_board', $param["i_board"]);
+        $stmt->bindValue(':title', $param["title"]);
+        $stmt->bindValue(':ctnt', $param["ctnt"]);
+        $stmt->execute();
+    }
+
+    public function insBoard($param)
+    {
+        $sql = "INSERT INTO t_board (i_user, title, ctnt)
+                VALUES (:i_user, :title, :ctnt)";
+        $stmt = $this->pdo->prepare($sql); // sql문을 알아서 변환시켜주는것 (문자열-> 문자열, 숫자면 홑따옴표 붙여줌)
+        $stmt->bindValue(':i_user', $param["i_user"]);
+        $stmt->bindValue(':title', $param["title"]);
+        $stmt->bindValue(':ctnt', $param["ctnt"]);
+        $stmt->execute();
+    }
+}
 
 
 

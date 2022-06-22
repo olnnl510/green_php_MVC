@@ -1,6 +1,8 @@
 <?php
 namespace application\controllers;
 
+include_once "application\utils/SessionUtils.php";
+
 abstract class Controller {
     public function __construct($action) { // 얘가 호출이 됨. 객체 생성자호출 -> 값없음 -> 부모의 생성자 들고옴. 그것이 바로 이 아이
         $view = $this->$action(); // $view로 넘어오는것 : board/list.php 문자열
@@ -13,7 +15,8 @@ abstract class Controller {
 
     protected function getView($view) {
         if(strpos($view, "redirect:") === 0) {
-            header("Location: http://" . _HOST . substr($view, 9));
+            header("Location: " . substr($view, 9));
+            return;
         }
         return _VIEW . "/" . $view; // 실제 열어야 할 파일명 리턴
     }       // 상수

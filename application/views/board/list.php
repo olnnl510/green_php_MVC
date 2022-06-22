@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once "application/views/template/head.php"; ?>
+<?php use application\models\UserModel; ?>
+
 
 <body>
     <h1>list</h1>
@@ -9,6 +11,7 @@
             <tr>
                 <td>번호</td>
                 <td>제목</td>
+                <td>작성자</td>
                 <td>작성일</td>
             </tr>
         </thead>
@@ -17,6 +20,7 @@
                 <tr data-i_board="<?= $item->i_board ?>">
                     <td><?= $item->i_board ?></td>
                     <td><?= $item->title ?></td>
+                    <td><?= $item->nm ?></td>
                     <td><?= $item->created_at ?></td>
                 </tr>
             <?php } ?>

@@ -8,11 +8,14 @@
     define('_CHARSET', 'utf8');
     define("_VIEW", "application/views/");
 
+    define("_TITLE", "title");
     define("_HEADER", "header");
     define("_MAIN", "main");
     define("_FOOTER", "footer");
 
+    define("_LOGINUSER", "loginUser");
     define("_CSS", "css");
     define("_JS", "js");
 
     // 상수들 모아놓은 곳
+    // 실수를 하지 않기위해!
