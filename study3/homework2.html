@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type='number'] {
+            width: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table,
+        td {
+            border: 1px solid #000;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="number" id="rowNum">행
+        <input type="number" id="colNum">열
+        <button id="write">작성</button>
+    </div>
+    <div id="result"></div>
+
+    <script>
+        const inputRowNum = document.querySelector('#rowNum');
+        const inputColNum = document.querySelector('#colNum');
+        const btnWrite = document.querySelector('#write');
+        const divResult = document.querySelector('#result');
+
+        btnWrite.addEventListener('click', function () {
+            const rowNum = Number(inputRowNum.value);
+            const colNum = Number(inputColNum.value);
+            const table = document.createElement('table');
+            divResult.innerHTML = '';
+            divResult.appendChild(table);
+
+            for (let i = 0; i < rowNum; i++) {
+                const tr = document.createElement('tr');
+                table.appendChild(tr);
+                for (let z = 0; z < colNum; z++) {
+                    const td = document.createElement('td');
+                    tr.appendChild(td);
+                    td.innerText = `${i},${z}`;
+                }
+            }
+        });        
+    </script>
+</body>
+
+</html>
